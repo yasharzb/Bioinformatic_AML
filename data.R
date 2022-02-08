@@ -61,6 +61,7 @@ heatmap(cor(gene_exp), labRow = sml, labCol = sml)
 
 ### Difference
 
+pca <- prcomp(gene_exp.scaled)
 pca_rot <- data.frame(pca$rotation[,1:3], group = sml)
 sml_near <- sml
 sml_near[pca_rot$PC2 > 0.13 & pca_rot$PC1 < -0.025 & pca_rot$group == "Test"] <- "Near"
@@ -90,7 +91,7 @@ exp_low <- subset(summary_table, logFC < -1& adj.P.Val < 0.05)
 low_genes <- unique(as.character(strsplit2( (exp_low$Gene.symbol),"///")))
 
 print("High exp:")
-aml.up.genes
+high_genes
 
 print("Low exp:")
-aml.down.genes
+low_genes
